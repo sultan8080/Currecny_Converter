@@ -57,14 +57,13 @@ function afficheDrapeu(element) {
 const changeIcon = document.getElementById("icon");
 
 changeIcon.addEventListener("click", () => {
-    alert(fromDevise.value);
-    alert(toDevise.value);
-
-//   let initialCode = fromDevise.value;
-//   fromDevise.value = toDevise.value;
-//   toDevise.value = initialCode;
-//   afficheDrapeu(fromDevise);
-//   afficheDrapeu(toDevise);
+    // alert(fromDevise.value);
+    // alert(toDevise.value);
+  let initialCode = fromDevise.value;
+  fromDevise.value = toDevise.value;
+  toDevise.value = initialCode;
+  afficheDrapeu(fromDevise);
+  afficheDrapeu(toDevise);
 })
 
 
