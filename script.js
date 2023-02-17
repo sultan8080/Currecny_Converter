@@ -53,18 +53,41 @@ function afficheDrapeu(element) {
 }
 
 // exchange icon interaction on click
-
 const changeIcon = document.getElementById("icon");
-
 changeIcon.addEventListener("click", () => {
     // alert(fromDevise.value);
     // alert(toDevise.value);
-  let initialCode = fromDevise.value;
-  fromDevise.value = toDevise.value;
-  toDevise.value = initialCode;
-  afficheDrapeu(fromDevise);
-  afficheDrapeu(toDevise);
+    let initialCode = fromDevise.value;
+    fromDevise.value = toDevise.value;
+    toDevise.value = initialCode;
+    afficheDrapeu(fromDevise);
+    afficheDrapeu(toDevise);
 })
+
+//Converting currency button
+convertirButton.addEventListener("click", e => {
+    e.preventDefault();
+    convertirDevise();
+})
+
+function convertirDevise() {
+    const inputMontant = document.getElementById("inputAmount").value;
+    const tauxConvertirText = document.getElementById("tauxConvertir");
+    if (inputMontant == "" || inputMontant == "0") {
+        inputMontant = 1;
+    }
+    // API exchangerate-api.com
+    let url = `https://v6.exchangerate-api.com/v6/e7ee5980c20408e58333386f/latest/${fromDevise.value}`;
+    fetch(url).then(response => response.json()).then(result => {
+        let echangeTaux = result.conversion_rates[toDevise.value];
+        let totalEchTaux = (inputMontant * echangeTaux).toFixed(2);
+        tauxConvertirText.innerText = `${inputMontant} ${fromDevise.value} = ${totalEchTaux} ${toDevise.value}`;
+    }).catch(() => {
+        tauxConvertirText.innerText = "Quelque chose a mal tourné";
+    });
+}
+
+
 
 
 
