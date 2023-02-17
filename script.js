@@ -55,13 +55,13 @@ function afficheDrapeu(element) {
 // exchange icon interaction on click
 const changeIcon = document.getElementById("icon");
 changeIcon.addEventListener("click", () => {
-    // alert(fromDevise.value);
-    // alert(toDevise.value);
     let initialCode = fromDevise.value;
     fromDevise.value = toDevise.value;
     toDevise.value = initialCode;
     afficheDrapeu(fromDevise);
     afficheDrapeu(toDevise);
+    //when change the country code and the drapeu
+    convertirDevise();
 })
 
 //Converting currency button
@@ -86,6 +86,11 @@ function convertirDevise() {
         tauxConvertirText.innerText = "Quelque chose a mal tourné";
     });
 }
+
+// The exchange rate on windows load
+window.addEventListener("load", (event) =>{
+    convertirDevise();
+})
 
 
 
