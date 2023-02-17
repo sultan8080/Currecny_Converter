@@ -17,37 +17,55 @@ let listPays = {
     "SKK": "SK", "SLL": "SL", "SOS": "SO", "SRD": "SR", "STD": "ST", "SVC": "SV", "SYP": "SY", "SZL": "SZ", "THB": "TH", "TJS": "TJ",
     "TMT": "TM", "TND": "TN", "TOP": "TO", "TRY": "TR", "TTD": "TT", "TWD": "TW", "TZS": "TZ", "UAH": "UA", "UGX": "UG", "USD": "US",
     "UYU": "UY", "UZS": "UZ", "VEF": "VE", "VND": "VN", "VUV": "VU", "YER": "YE", "ZAR": "ZA", "ZMK": "ZM", "ZWD": "ZW"
-  };
+};
 
-  const selectList = document.querySelectorAll("form .form-select"),
-  fromDevise = document.querySelectorAll(".deMontant"),
-  toDevise = document.querySelectorAll(".toMontant"),
-  convertirButton = document.getElementById("convertir");
+const selectList = document.querySelectorAll("form .form-select");
+const fromDevise = document.querySelector(".deMontant select");
+const toDevise = document.querySelector(".toMontant select");
+const convertirButton = document.getElementById("convertir");
 
-  
-  for (let i = 0; i < selectList.length; i++) {
+// console.log(fromDevise);
+for (let i = 0; i < selectList.length; i++) {
     for (let deviseCode in listPays) {
-      let selected;
-      if (i == 0) {
-        selected = deviseCode == "EUR" ? "selected" : "";
-      } else if (i == 1) {
-        selected = deviseCode == "USD" ? "selected" : "";
-      }
+        let selected;
+        if (i == 0) {
+            selected = deviseCode == "EUR" ? "selected" : "";
+        } else if (i == 1) {
+            selected = deviseCode == "USD" ? "selected" : "";
+        }
 
-      let optionBalise = `<option value="${deviseCode}" ${selected}>${deviseCode}</option>`;
-      selectList[i].insertAdjacentHTML("beforeend", optionBalise);
-  
-      selectList[i].addEventListener("change", (event) => {
-        afficheDrapeu(event.target);
-      });
+        let optionBalise = `<option value="${deviseCode}" ${selected}>${deviseCode}</option>`;
+        selectList[i].insertAdjacentHTML("beforeend", optionBalise);
+
+        selectList[i].addEventListener("change", (event) => {
+            afficheDrapeu(event.target);
+        });
     }
-  }
+}
 // selecting drapeau as per country
-  function afficheDrapeu(element){
-   for (let changeCode in listPays){
-    if (changeCode == element.value){
-        let imgBalise = element.parentElement.parentElement.querySelector("img");
-    imgBalise.src =`https://flagcdn.com/48x36/${listPays[changeCode].toLowerCase()}.png`;
+function afficheDrapeu(element) {
+    for (let changeCode in listPays) {
+        if (changeCode == element.value) {
+            let imgBalise = element.parentElement.parentElement.querySelector("img");
+            imgBalise.src = `https://flagcdn.com/48x36/${listPays[changeCode].toLowerCase()}.png`;
+        }
     }
-   }
-  }
+}
+
+// exchange icon interaction on click
+
+const changeIcon = document.getElementById("icon");
+
+changeIcon.addEventListener("click", () => {
+    alert(fromDevise.value);
+    alert(toDevise.value);
+
+//   let initialCode = fromDevise.value;
+//   fromDevise.value = toDevise.value;
+//   toDevise.value = initialCode;
+//   afficheDrapeu(fromDevise);
+//   afficheDrapeu(toDevise);
+})
+
+
+
